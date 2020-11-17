@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+wrapper.gradleVersion = '4.8'
+
+group 'net.sds'
+version '0.1.-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+
+    testCompile 'junit:junit:4.12'
+}
