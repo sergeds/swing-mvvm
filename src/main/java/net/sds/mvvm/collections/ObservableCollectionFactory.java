@@ -24,8 +24,8 @@ import java.util.function.Predicate;
 /**
  * Builder class for ObservableCollections.
  */
-public class ObservableCollectionBuilder<T> {
-  private ObservableCollectionBuilder() {}
+public class ObservableCollectionFactory<T> {
+  private ObservableCollectionFactory() {}
 
   /**
    * Creates an empty collection.

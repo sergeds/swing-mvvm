@@ -27,9 +27,9 @@ public class SortedObservableCollectionViewTests {
   @Test
   public void theCollectionRemainsSorted() {
     // Given:
-    ObservableCollection<String> source = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> source = ObservableCollectionFactory.createCollection();
     source.addAll(Arrays.asList("D", "E", "F"));
-    ObservableCollection<String> sorted = ObservableCollectionBuilder.createCollection(source, Comparator.naturalOrder());
+    ObservableCollection<String> sorted = ObservableCollectionFactory.createCollection(source, Comparator.naturalOrder());
 
     // When/Then:
     source.add("B");

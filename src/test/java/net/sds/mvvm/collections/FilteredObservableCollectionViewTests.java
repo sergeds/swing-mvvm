@@ -26,11 +26,11 @@ public class FilteredObservableCollectionViewTests {
   @Test
   public void theListWorks() {
     // Given:
-    ObservableCollection<TestBean> source = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<TestBean> source = ObservableCollectionFactory.createCollection();
     source.add(new TestBean(true));
     source.add(new TestBean(true));
     source.add(new TestBean(true));
-    ObservableCollection<TestBean> filtered = ObservableCollectionBuilder.createCollection(source, b -> b.isEnabled());
+    ObservableCollection<TestBean> filtered = ObservableCollectionFactory.createCollection(source, b -> b.isEnabled());
 
     // When:
     int size = filtered.size();

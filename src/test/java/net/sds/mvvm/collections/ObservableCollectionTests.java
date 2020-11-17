@@ -28,7 +28,7 @@ public class ObservableCollectionTests {
   @Test
   public void anAddedEventShouldBeReceived() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -44,7 +44,7 @@ public class ObservableCollectionTests {
   @Test
   public void anAddedEventWithMultipleEntriesShouldBeReceived() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -61,7 +61,7 @@ public class ObservableCollectionTests {
   @Test
   public void anItemCanBeAddedAtAnIndex() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -77,7 +77,7 @@ public class ObservableCollectionTests {
   @Test
   public void multipleItemsCanBeAddedAtAnIndex() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -94,7 +94,7 @@ public class ObservableCollectionTests {
   @Test
   public void anItemCanBeRemoved() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -112,7 +112,7 @@ public class ObservableCollectionTests {
   @Test
   public void anItemCanBeRemovedAtAnIndex() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -131,7 +131,7 @@ public class ObservableCollectionTests {
   @Test
   public void allItemsCanBeRemoved() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -148,7 +148,7 @@ public class ObservableCollectionTests {
   @Test
   public void itemsCanBeRemovedSelectively() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -166,7 +166,7 @@ public class ObservableCollectionTests {
   @Test
   public void aRangeCanBeRemoved() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -184,7 +184,7 @@ public class ObservableCollectionTests {
   @Test
   public void aEntryCanBeReplaced() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -208,7 +208,7 @@ public class ObservableCollectionTests {
   @Test
   public void itemsCanBeRetained() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -226,7 +226,7 @@ public class ObservableCollectionTests {
   @Test
   public void aCollectionCanBeCleared() {
     // Given:
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(e -> event = e);
 
     // When:
@@ -246,7 +246,7 @@ public class ObservableCollectionTests {
   public void aListenerCanBeRemoved() {
     // Given:
     CollectionChangedListener l = e -> event = e;
-    ObservableCollection<String> col = ObservableCollectionBuilder.createCollection();
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection();
     col.addListener(l);
 
     // When:
