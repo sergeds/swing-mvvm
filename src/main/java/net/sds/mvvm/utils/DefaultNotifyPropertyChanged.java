@@ -23,17 +23,17 @@ import java.util.Objects;
 import net.sds.mvvm.NotifyPropertyChanged;
 
 /**
- * Abstract implementation of NotifyPropertyChanged that does the management of
- * the registeres PropertyChangedListeners.
+ * Default implementation of NotifyPropertyChanged that does the management of
+ * the registers PropertyChangedListeners.
  */
-public abstract class AbstractNotifyPropertyChanged implements NotifyPropertyChanged {
+public class DefaultNotifyPropertyChanged implements NotifyPropertyChanged {
   private PropertyChangeSupport support;
 
-  protected AbstractNotifyPropertyChanged() {
+  protected DefaultNotifyPropertyChanged() {
     support = new PropertyChangeSupport(this);
   }
 
-  public AbstractNotifyPropertyChanged(Object source) {
+  public DefaultNotifyPropertyChanged(Object source) {
     support = new PropertyChangeSupport(source);
   }
 

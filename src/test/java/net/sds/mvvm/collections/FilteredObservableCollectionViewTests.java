@@ -17,7 +17,7 @@
 
 package net.sds.mvvm.collections;
 
-import net.sds.mvvm.utils.AbstractNotifyPropertyChanged;
+import net.sds.mvvm.utils.DefaultNotifyPropertyChanged;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -65,7 +65,7 @@ public class FilteredObservableCollectionViewTests {
     Assert.assertEquals(3, filtered.size());
   }
 
-  private static class TestBean extends AbstractNotifyPropertyChanged {
+  private static class TestBean extends DefaultNotifyPropertyChanged {
     public boolean enabled;
     public TestBean(boolean enabled) {
       this.enabled = enabled;
