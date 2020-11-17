@@ -30,10 +30,14 @@ public class DefaultNotifyPropertyChanged implements NotifyPropertyChanged {
   private PropertyChangeSupport support;
 
   protected DefaultNotifyPropertyChanged() {
-    support = new PropertyChangeSupport(this);
+    initialize(this);
   }
 
   public DefaultNotifyPropertyChanged(Object source) {
+    initialize(source);
+  }
+
+  private void initialize(Object source) {
     support = new PropertyChangeSupport(source);
   }
 
