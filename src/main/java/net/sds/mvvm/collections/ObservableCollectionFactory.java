@@ -20,6 +20,7 @@ package net.sds.mvvm.collections;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
+import net.sds.mvvm.NotifyPropertyChanged;
 
 /**
  * Builder class for ObservableCollections.
@@ -69,13 +70,14 @@ public class ObservableCollectionFactory<T> {
   }
 
   /**
-   * Returns a view that filters the elements of the source collection.
+   * Returns a view that filters the elements of the source collection. When NotifyPropertyChanged elements are added, the collection
+   * will register a listener using the given property name.
    * @param source The collection to filter.
    * @param predicate The predicate used for filtering.
    * @param propertName The name of the property to use for change events.
    * @return The collection view.
    */
-  public static <T> ObservableCollection<T> createCollection(ObservableCollection<T> source, Predicate<T> predicate, String propertName) {
+  public static <T extends NotifyPropertyChanged> ObservableCollection<T> createCollection(ObservableCollection<T> source, Predicate<T> predicate, String propertName) {
     FilteredObservableCollectionView<T> coll = new FilteredObservableCollectionView<>(source, predicate, propertName);
     coll.initialize();
     return coll;
