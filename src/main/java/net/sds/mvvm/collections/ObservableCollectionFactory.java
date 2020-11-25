@@ -25,7 +25,7 @@ import net.sds.mvvm.NotifyPropertyChanged;
 /**
  * Builder class for ObservableCollections.
  */
-public class ObservableCollectionFactory<T> {
+public class ObservableCollectionFactory {
   private ObservableCollectionFactory() {}
 
   /**
@@ -52,7 +52,7 @@ public class ObservableCollectionFactory<T> {
    * @return The collection view.
    */
   public static <T> ObservableCollection<T> createCollection(ObservableCollection<T> source, Comparator<T> comparator) {
-    SortedObservableCollectionView<T> coll = new SortedObservableCollectionView(source, comparator);
+    SortedObservableCollectionView<T> coll = new SortedObservableCollectionView<>(source, comparator);
     coll.initialize();
     return coll;
   }
