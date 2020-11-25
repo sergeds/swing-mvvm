@@ -263,4 +263,12 @@ public class ObservableCollectionTests {
     // Then:
     Assert.assertNull(event);
   }
+
+  @Test
+  public void anItemCanBeFoundUsingPredicates() {
+    ObservableCollection<String> col = ObservableCollectionFactory.createCollection(Arrays.asList("A", "B", "C"));
+    String result = col.findEntry(s -> s.equals("B"));
+    Assert.assertNotNull(result);
+    Assert.assertEquals("B", result);
+  }
 }
