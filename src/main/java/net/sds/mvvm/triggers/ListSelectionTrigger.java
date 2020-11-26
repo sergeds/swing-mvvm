@@ -20,7 +20,9 @@ package net.sds.mvvm.triggers;
 import java.util.Optional;
 import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
 import net.sds.mvvm.bindings.Binding;
+import net.sds.mvvm.bindings.BindingException;
 import net.sds.mvvm.bindings.Direction;
 
 public class ListSelectionTrigger implements Trigger {
@@ -34,7 +36,7 @@ public class ListSelectionTrigger implements Trigger {
   }
 
   @Override
-  public void register(final Binding binding, final Direction direction) {
+  public void register(final Binding binding, final Direction direction) throws BindingException {
     list.ifPresent(l -> l.addListSelectionListener(e -> {
       if (!e.getValueIsAdjusting()) {
         binding.apply(direction);

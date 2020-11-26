@@ -30,7 +30,7 @@ public class Binder {
   private Binder() {
   }
 
-  public static void bind(Object source, Object target) {
+  public static void bind(Object source, Object target) throws BindingException {
     for (Field f : getAllAnnotatedFields(source.getClass(), Bind.class)) {
       Bind[] binds = f.getAnnotationsByType(Bind.class);
       for (Bind bind : binds) {
@@ -60,7 +60,7 @@ public class Binder {
     }
   }
 
-  private static Binding createBiDirectionalBinding(Object source, String sourcePath, Object target, String targetPath) {
+  private static Binding createBiDirectionalBinding(Object source, String sourcePath, Object target, String targetPath) throws BindingException{
     R r = new R(source, sourcePath, target, targetPath);
     return new BindingBuilder<>()
         .withSourceSupplier(ValueSupplierFactory.create(r.resolvedSource, r.resolvedSourcePath))
@@ -72,7 +72,7 @@ public class Binder {
         .build();
   }
 
-  private static Binding createUniDirectionalBinding(Object source, String sourcePath, Object target, String targetPath) {
+  private static Binding createUniDirectionalBinding(Object source, String sourcePath, Object target, String targetPath) throws BindingException{
     R r = new R(source, sourcePath, target, targetPath);
     return new BindingBuilder<>()
         .withSourceSupplier(ValueSupplierFactory.create(r.resolvedSource, r.resolvedSourcePath))
@@ -87,7 +87,7 @@ public class Binder {
     private Object resolvedTarget;
     private String resolvedSourcePath;
     private String resolvedTargetPath;
-    private R(Object source, String sourcePath, Object target, String targetPath) {
+    private R(Object source, String sourcePath, Object target, String targetPath) throws BindingException {
       String[] split = sourcePath.split("\\.");
       resolvedSource = resolvePath(source, split);
       resolvedSourcePath = split[split.length - 1];

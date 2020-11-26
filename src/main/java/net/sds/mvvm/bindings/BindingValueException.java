@@ -17,7 +17,11 @@
 
 package net.sds.mvvm.bindings;
 
-@FunctionalInterface
-public interface ValueSupplier<T> {
-  T get() throws BindingValueException;
+public class BindingValueException extends RuntimeException {
+  public BindingValueException(String msg) {
+    super(msg);
+  }
+  public BindingValueException(String msg, Throwable cause) {
+    super(msg, cause);
+  }
 }

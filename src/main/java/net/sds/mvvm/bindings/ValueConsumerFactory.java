@@ -52,7 +52,7 @@ public class ValueConsumerFactory {
    * @param <T>
    * @return The ValueConsumer.
    */
-  public static <T> ValueConsumer<T> create(Object source, String path) {
+  public static <T> ValueConsumer<T> create(Object source, String path) throws BindingException {
     for (ConsumerRegistrator registrator : registrators) {
       if (registrator.predicate.test(source, path)) {
         return registrator.factory.apply(source, path);
@@ -69,7 +69,7 @@ public class ValueConsumerFactory {
    * @param path The path to use.
    * @return The supplier.
    */
-  private static ValueConsumer getConsumer(Object object, String path) {
+  private static ValueConsumer getConsumer(Object object, String path) throws BindingException {
     Optional<ValueConsumer> supplier = getMethodConsumer(object, path);
     if (supplier.isPresent()) {
       return supplier.get();
@@ -108,7 +108,7 @@ public class ValueConsumerFactory {
         try {
           m.invoke(owner, o);
         } catch (ReflectiveOperationException e) {
-          throw new BindingException(String.format("Could not set the value %s using method %s!", o, m.getName()));
+          throw new BindingValueException(String.format("Could not set the value %s using method %s!", o, m.getName()));
         }
       });
     }
@@ -126,7 +126,7 @@ public class ValueConsumerFactory {
         try {
           f.set(owner, o);
         } catch (ReflectiveOperationException e) {
-          throw new BindingException(String.format("Could not set the value %s using field %s!", o, f.getName()));
+          throw new BindingValueException(String.format("Could not set the value %s using field %s!", o, f.getName()));
         }
       });
     }

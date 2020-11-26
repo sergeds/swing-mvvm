@@ -101,7 +101,7 @@ public class BindingBuilder<S, T> {
    * Builds and returns the binding.
    * @return The binding.
    */
-  public Binding build() {
+  public Binding build()  throws BindingException {
     DefaultBinding binding = new DefaultBinding();
 
 

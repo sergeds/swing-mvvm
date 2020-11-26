@@ -38,7 +38,7 @@ public class ReflectionUtils {
    * @param path The path.
    * @return The final object.
    */
-  public static Object resolvePath(Object object, String[] path) {
+  public static Object resolvePath(Object object, String[] path) throws BindingException {
     Object provider = object;
     for (int i = 0; i < path.length - 1; i++) {
       provider = getValue(provider, path[i]);
@@ -54,7 +54,7 @@ public class ReflectionUtils {
    * @param path The path.
    * @return The object.
    */
-  public static Object getValue(Object parent, String path) {
+  public static Object getValue(Object parent, String path) throws BindingException {
     Object result = null;
     while (result == null) {
       try {

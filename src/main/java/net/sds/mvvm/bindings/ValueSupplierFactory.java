@@ -43,7 +43,7 @@ public class ValueSupplierFactory {
   private ValueSupplierFactory() {
   }
 
-  public static <T> ValueSupplier<T> create(Object source, String path) {
+  public static <T> ValueSupplier<T> create(Object source, String path) throws BindingException {
     for (SupplierRegistrator registrator : registrators) {
       if (registrator.predicate.test(source, path)) {
         return registrator.factory.apply(source, path);
@@ -60,7 +60,7 @@ public class ValueSupplierFactory {
    * @param path The path to use.
    * @return The supplier.
    */
-  private static ValueSupplier getSupplier(Object object, String path) {
+  private static ValueSupplier getSupplier(Object object, String path) throws BindingException {
 
     Optional<ValueSupplier> supplier = getMethodSupplier(object, path);
     if (supplier.isPresent()) {
@@ -90,7 +90,7 @@ public class ValueSupplierFactory {
         try {
           return method.get().invoke(owner);
         } catch (ReflectiveOperationException e) {
-          throw new BindingException(String.format("Could not get the value of %s from %s!", method.get().getName(), owner));
+          throw new BindingValueException(String.format("Could not get the value of %s from %s!", method.get().getName(), owner));
         }
       });
     }
@@ -115,7 +115,7 @@ public class ValueSupplierFactory {
         try {
           return f.get(owner);
         } catch (ReflectiveOperationException e) {
-          throw new BindingException(String.format("Could not get the value of %s from %s!", f.getName(), owner));
+          throw new BindingValueException(String.format("Could not get the value of %s from %s!", f.getName(), owner));
         }
       });
     }

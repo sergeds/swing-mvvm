@@ -18,9 +18,10 @@
 package net.sds.mvvm.triggers;
 
 import net.sds.mvvm.bindings.Binding;
+import net.sds.mvvm.bindings.BindingException;
 import net.sds.mvvm.bindings.Direction;
 
 @FunctionalInterface
 public interface Trigger {
-  void register(Binding binding, Direction direction);
+  void register(Binding binding, Direction direction) throws BindingException;
 }

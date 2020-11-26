@@ -40,7 +40,7 @@ public class TriggerFactory {
   private TriggerFactory() {
   }
 
-  public static Trigger create(Object source, String property) {
+  public static Trigger create(Object source, String property) throws BindingException {
     for (TriggerRegistrator registrator : registrators) {
       if (registrator.predicate.test(source, property)) {
         return registrator.factory.apply(source, property);

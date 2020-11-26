@@ -19,5 +19,5 @@ package net.sds.mvvm.bindings;
 
 @FunctionalInterface
 public interface ValueConsumer<T> {
-  void accept(T t) throws BindingException;
+  void accept(T t) throws BindingValueException;
 }
