@@ -20,7 +20,6 @@ package net.sds.mvvm.triggers;
 import java.util.Optional;
 import javax.swing.JList;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
 import net.sds.mvvm.bindings.Binding;
 import net.sds.mvvm.bindings.BindingException;
 import net.sds.mvvm.bindings.Direction;
