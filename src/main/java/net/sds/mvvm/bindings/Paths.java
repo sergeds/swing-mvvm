@@ -26,8 +26,6 @@ public interface Paths {
   String FONT = "font";
   String FOREGROUND = "foreground";
 
-  String GET = "get";
-
   String MODEL = "model";
 
   String SELECTED = "selected";
@@ -36,9 +34,9 @@ public interface Paths {
   String SELECTED_ITEM = "selectedItem";
   String SELECTED_ROW = "selectedRow";
   String SELECTED_ROWS = "selectedRows";
-  String SET = "set";
 
   String TEXT = "text";
 
+  String VALUE = "value";
   String VISIBLE = "visible";
 }

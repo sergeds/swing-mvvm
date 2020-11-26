@@ -134,7 +134,7 @@ public class ValueConsumerFactory {
   }
 
   static {
-    registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Property && (s.equals(Paths.SET) || s == null || s.length() == 0)
+    registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Property && s.equals(Paths.VALUE)
         , (o, s) -> v -> Property.class.cast(o).set(v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.TEXT)

@@ -17,12 +17,10 @@
 
 package net.sds.mvvm.triggers;
 
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import javax.print.Doc;
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.JList;
@@ -51,36 +49,36 @@ public class TriggerFactory {
   }
 
   static {
-    registerFactory((o, p) -> o instanceof Document && p.equals(Paths.TEXT)
+    registerTriggerFactory((o, p) -> o instanceof Document && p.equals(Paths.TEXT)
         , (o, p) -> new DocumentTextChangedTrigger(Document.class.cast(o)));
 
-    registerFactory((o, p) -> o instanceof JTextComponent && p.equals(Paths.TEXT)
+    registerTriggerFactory((o, p) -> o instanceof JTextComponent && p.equals(Paths.TEXT)
         , (o, p) -> new DocumentTextChangedTrigger(JTextComponent.class.cast(o).getDocument()));
 
-    registerFactory((o, p) -> o instanceof ObservableCollection
+    registerTriggerFactory((o, p) -> o instanceof ObservableCollection
         , (o, p) -> new ObservableCollectionTrigger(ObservableCollection.class.cast(o)));
 
-    registerFactory((o, p) -> o instanceof Property
+    registerTriggerFactory((o, p) -> o instanceof Property
         , (o, p) -> new PropertyTrigger(Property.class.cast(o)));
 
-    registerFactory((o, p) -> o instanceof JList && (p.equals(Paths.SELECTED_INDEX) || p.equals(Paths.SELECTED_INDICES))
+    registerTriggerFactory((o, p) -> o instanceof JList && (p.equals(Paths.SELECTED_INDEX) || p.equals(Paths.SELECTED_INDICES))
         , (o, p) -> new ListSelectionTrigger(JList.class.cast(o)));
 
-    registerFactory((o, p) -> o instanceof JTable && (p.equals(Paths.SELECTED_ROW) || p.equals(Paths.SELECTED_ROWS))
+    registerTriggerFactory((o, p) -> o instanceof JTable && (p.equals(Paths.SELECTED_ROW) || p.equals(Paths.SELECTED_ROWS))
         , (o, p) -> new ListSelectionTrigger(JTable.class.cast(o)));
 
-    registerFactory((o, p) -> o instanceof AbstractButton && p.equals(Paths.SELECTED)
+    registerTriggerFactory((o, p) -> o instanceof AbstractButton && p.equals(Paths.SELECTED)
         , (o, p) -> new ItemSelectedTrigger(AbstractButton.class.cast(o)));
 
-    registerFactory((o, p) -> o instanceof JComponent
+    registerTriggerFactory((o, p) -> o instanceof JComponent
         , (o, p) -> new ComponentChangedTrigger(JComponent.class.cast(o), p));
   }
 
-  public static void registerFactory(BiPredicate<Object, String> predicate, BiFunction<Object, String, Trigger> factory) {
-    registerFactory(predicate, factory, -1);
+  public static void registerTriggerFactory(BiPredicate<Object, String> predicate, BiFunction<Object, String, Trigger> factory) {
+    registerTriggerFactory(predicate, factory, -1);
   }
 
-  public static void registerFactory(BiPredicate<Object, String> predicate, BiFunction<Object, String, Trigger> factory, int index) {
+  public static void registerTriggerFactory(BiPredicate<Object, String> predicate, BiFunction<Object, String, Trigger> factory, int index) {
     TriggerRegistrator registrator = new TriggerRegistrator(predicate, factory);
     if (index < 0) {
       registrators.add(registrator);

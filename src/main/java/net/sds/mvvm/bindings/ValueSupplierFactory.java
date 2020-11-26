@@ -123,7 +123,7 @@ public class ValueSupplierFactory {
   }
 
   static {
-    registrators.add(new SupplierRegistrator((o, s) -> o instanceof Property && (s.equals(Paths.GET) || s == null || s.length() == 0)
+    registrators.add(new SupplierRegistrator((o, s) -> o instanceof Property && s.equals(Paths.VALUE)
         , (o, s) -> () -> Property.class.cast(o).get()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.TEXT)
