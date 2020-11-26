@@ -32,6 +32,7 @@ import java.util.function.BiPredicate;
 import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.text.JTextComponent;
@@ -128,6 +129,9 @@ public class ValueSupplierFactory {
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.TEXT)
         , (o, s) -> () -> JTextComponent.class.cast(o).getText()));
+
+    registrators.add(new SupplierRegistrator((o, s) -> o instanceof JLabel && s.equals(Paths.TEXT)
+        , (o, s) -> () -> JLabel.class.cast(o).getText()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.EDITABLE)
         , (o, s) -> () -> JTextComponent.class.cast(o).isEditable()));

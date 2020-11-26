@@ -33,6 +33,7 @@ import java.util.function.BiPredicate;
 import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.ListModel;
@@ -138,10 +139,13 @@ public class ValueConsumerFactory {
         , (o, s) -> v -> Property.class.cast(o).set(v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.TEXT)
-        , (o, s) -> v -> JTextComponent.class.cast(o).setText(String.class.cast(v))));
+        , (o, s) -> v -> JTextComponent.class.cast(o).setText(v != null ? v.toString() : null)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.EDITABLE)
         , (o, s) -> v -> JTextComponent.class.cast(o).setEditable(Boolean.class.cast(v))));
+
+    registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JLabel && s.equals(Paths.TEXT)
+        , (o, s) -> v -> JLabel.class.cast(o).setText(v != null ? v.toString() : null)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Component && s.equals(Paths.ENABLED)
         , (o, s) -> v -> Component.class.cast(o).setEnabled(Boolean.class.cast(v))));
@@ -180,18 +184,26 @@ public class ValueConsumerFactory {
         , (o, s) -> v -> JTable.class.cast(o).setModel(TableModel.class.cast(v))));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.SELECTED_ROW)
-        , (o, s) -> v -> setSelectedRows(JTable.class.cast(o), new int[] {int.class.cast(v)})));
+        , (o, s) -> v -> setSelectedRows(JTable.class.cast(o), new Object[] {v})));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.SELECTED_ROWS)
-        , (o, s) -> v -> setSelectedRows(JTable.class.cast(o), int[].class.cast(v))));
+        , (o, s) -> v -> setSelectedRows(JTable.class.cast(o), Object[].class.cast(v))));
   }
 
-  private static void setSelectedRows(JTable table, int[] rows) {
-    int[] viewRows = new int[rows.length];
+  private static void setSelectedRows(JTable table, Object[] rows) {
+    List<Integer> viewRows = new ArrayList<>();
     for (int i = 0; i < rows.length; i++) {
-      viewRows[i] = table.convertRowIndexToView(rows[i]);
+      if (rows[i] == null || rows[i].toString().trim().length() == 0) {
+        continue;
+      }
+      int row = rows[i] instanceof Integer ? Integer.class.cast(rows[i]) : Integer.parseInt(rows[i].toString());
+      viewRows.add(table.convertRowIndexToView(row));
     }
-    table.getSelectionModel().setSelectionInterval(viewRows[0], viewRows[viewRows.length - 1]);
+    if (viewRows.size() > 0) {
+      table.getSelectionModel().setSelectionInterval(viewRows.get(0), viewRows.get(viewRows.size() - 1));
+    } else {
+      table.getSelectionModel().clearSelection();
+    }
   }
 
   public static void registerConsumerFactory(BiPredicate<Object, String> predicate, BiFunction<Object, String, ValueConsumer> factory) {
