@@ -19,11 +19,6 @@ package net.sds.mvvm.bindings;
 
 import static net.sds.mvvm.utils.ReflectionUtils.*;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 import net.sds.mvvm.triggers.TriggerFactory;
 
 public class Binder {
@@ -40,18 +35,16 @@ public class Binder {
         try {
           Object o = resolvePath(f.get(source), bind.value().split("\\."));
           Binding b;
-          Direction d = Direction.UP;
           if (bind.type().equals(BindingType.SOURCE_TO_TARGET)) {
             b = createUniDirectionalBinding(o, bind.value(), target, bind.target());
 
           } else if (bind.type().equals(BindingType.TARGET_TO_SOURCE)) {
             b = createUniDirectionalBinding(target, bind.target(), o, bind.value());
-            d = Direction.DOWN;
 
           } else {
             b = createBiDirectionalBinding(o, bind.value(), target, bind.target());
           }
-          b.apply(d);
+          b.apply(Direction.UP);
 
         } catch (ReflectiveOperationException e) {
           throw new BindingException("Could not create binding!", e);
