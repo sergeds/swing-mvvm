@@ -17,26 +17,28 @@
 
 package net.sds.mvvm.bindings;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+public interface Paths {
+  String BACKGROUND = "background";
 
-/**
- * Defines a link between a supplier (source) and a consumer (target).
- * When applied, the value of the supplier is passed on to the consumer.
- */
-public class BindingLink {
-  private ValueSupplier supplier;
-  private ValueConsumer consumer;
+  String EDITABLE = "editable";
+  String ENABLED = "enabled";
 
-  BindingLink(ValueSupplier supplier, ValueConsumer consumer) {
-    this.supplier = supplier;
-    this.consumer = consumer;
-  }
+  String FONT = "font";
+  String FOREGROUND = "foreground";
 
-  /**
-   * Applies the link, transferring the value from the supplier to the consumer.
-   */
-  void applyLink() {
-    consumer.accept(supplier.get());
-  }
+  String GET = "get";
+
+  String MODEL = "model";
+
+  String SELECTED = "selected";
+  String SELECTED_INDEX = "selectedIndex";
+  String SELECTED_INDICES = "selectedIndices";
+  String SELECTED_ITEM = "selectedItem";
+  String SELECTED_ROW = "selectedRow";
+  String SELECTED_ROWS = "selectedRows";
+  String SET = "set";
+
+  String TEXT = "text";
+
+  String VISIBLE = "visible";
 }

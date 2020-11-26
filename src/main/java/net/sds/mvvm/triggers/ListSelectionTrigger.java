@@ -17,43 +17,34 @@
 
 package net.sds.mvvm.triggers;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.Document;
+import java.util.Optional;
+import javax.swing.JList;
+import javax.swing.JTable;
 import net.sds.mvvm.bindings.Binding;
 import net.sds.mvvm.bindings.Direction;
 
-/**
- * Will register a listener to the document given, and apply the binding whenever the text changes.
- */
-public class DocumentTextChangedTrigger implements Trigger {
-  private Document document;
-
-  public DocumentTextChangedTrigger(Document document) {
-    this.document = document;
+public class ListSelectionTrigger implements Trigger {
+  private Optional<JList> list = Optional.empty();
+  private Optional<JTable> table = Optional.empty();
+  public ListSelectionTrigger(JList list) {
+    this.list = Optional.of(list);
+  }
+  public ListSelectionTrigger(JTable table) {
+    this.table = Optional.of(table);
   }
 
   @Override
   public void register(final Binding binding, final Direction direction) {
-    document.addDocumentListener(new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        applyBinding();
-      }
-
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        applyBinding();
-      }
-
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        applyBinding();
-      }
-
-      private void applyBinding() {
+    list.ifPresent(l -> l.addListSelectionListener(e -> {
+      if (!e.getValueIsAdjusting()) {
         binding.apply(direction);
       }
-    });
+    }));
+
+    table.ifPresent(t -> t.getSelectionModel().addListSelectionListener(e -> {
+      if (!e.getValueIsAdjusting()) {
+        binding.apply(direction);
+      }
+    }));
   }
 }

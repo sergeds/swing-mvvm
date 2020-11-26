@@ -30,10 +30,10 @@ import net.sds.mvvm.triggers.Trigger;
  * when the source changes. (or the target in a bi-directional binding).
  */
 public class BindingBuilder<S, T> {
-  private Supplier sourceSupplier;
-  private Consumer sourceConsumer;
-  private Supplier targetSupplier;
-  private Consumer targetConsumer;
+  private ValueSupplier sourceSupplier;
+  private ValueConsumer sourceConsumer;
+  private ValueSupplier targetSupplier;
+  private ValueConsumer targetConsumer;
   private Trigger sourceTrigger;
   private Trigger targetTrigger;
 
@@ -62,7 +62,7 @@ public class BindingBuilder<S, T> {
    * @param supplier
    * @return
    */
-  public BindingBuilder<S, T> withSourceSupplier(Supplier<S> supplier) {
+  public BindingBuilder<S, T> withSourceSupplier(ValueSupplier<S> supplier) {
     this.sourceSupplier = supplier;
     return this;
   }
@@ -72,7 +72,7 @@ public class BindingBuilder<S, T> {
    * @param consumer
    * @return
    */
-  public BindingBuilder<S, T> withSourceConsumer(Consumer<T> consumer) {
+  public BindingBuilder<S, T> withSourceConsumer(ValueConsumer<T> consumer) {
     this.sourceConsumer = consumer;
     return this;
   }
@@ -82,7 +82,7 @@ public class BindingBuilder<S, T> {
    * @param consumer
    * @return
    */
-  public BindingBuilder<S, T> withTargetConsumer(Consumer<T> consumer) {
+  public BindingBuilder<S, T> withTargetConsumer(ValueConsumer<T> consumer) {
     this.targetConsumer = consumer;
     return this;
   }
@@ -92,7 +92,7 @@ public class BindingBuilder<S, T> {
    * @param supplier
    * @return
    */
-  public BindingBuilder<S, T> withTargetSupplier(Supplier<S> supplier) {
+  public BindingBuilder<S, T> withTargetSupplier(ValueSupplier<S> supplier) {
     this.targetSupplier = supplier;
     return this;
   }
@@ -124,7 +124,7 @@ public class BindingBuilder<S, T> {
     return binding;
   }
 
-  private DefaultBinding createLink(DefaultBinding binding, Supplier<T> supplier, Consumer<T> consumer, Direction direction) {
+  private DefaultBinding createLink(DefaultBinding binding, ValueSupplier<T> supplier, ValueConsumer<T> consumer, Direction direction) {
     BindingLink link = new BindingLink(supplier, consumer);
     return binding.withBindingLink(direction, link);
   }

@@ -17,26 +17,13 @@
 
 package net.sds.mvvm.bindings;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * Defines a link between a supplier (source) and a consumer (target).
- * When applied, the value of the supplier is passed on to the consumer.
- */
-public class BindingLink {
-  private ValueSupplier supplier;
-  private ValueConsumer consumer;
-
-  BindingLink(ValueSupplier supplier, ValueConsumer consumer) {
-    this.supplier = supplier;
-    this.consumer = consumer;
-  }
-
-  /**
-   * Applies the link, transferring the value from the supplier to the consumer.
-   */
-  void applyLink() {
-    consumer.accept(supplier.get());
-  }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface BindValues {
+  Bind[] value();
 }
