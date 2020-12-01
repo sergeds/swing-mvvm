@@ -19,6 +19,7 @@ package net.sds.mvvm.triggers;
 
 import javax.swing.JTextField;
 import net.sds.mvvm.bindings.BindingBuilder;
+import net.sds.mvvm.bindings.BindingException;
 import net.sds.mvvm.properties.Property;
 import net.sds.mvvm.properties.PropertyFactory;
 import org.junit.Assert;
@@ -27,7 +28,7 @@ import org.junit.Test;
 public class DocumentTextChangedTriggerTests {
 
   @Test
-  public void textChangesArePropagated() {
+  public void textChangesArePropagated() throws BindingException {
     final StringBuilder b = new StringBuilder();
     JTextField field = new JTextField();
     new BindingBuilder<String, String>()
@@ -41,7 +42,7 @@ public class DocumentTextChangedTriggerTests {
   }
 
   @Test
-  public void textChangesCanBeBidirectional() {
+  public void textChangesCanBeBidirectional() throws BindingException {
     Property<String> prop = PropertyFactory.createProperty("Text", this, String.class);
     JTextField field = new JTextField();
     new BindingBuilder<String, String>()

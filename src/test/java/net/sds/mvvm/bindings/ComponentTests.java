@@ -30,7 +30,7 @@ public class ComponentTests {
   private Font font;
 
   @Test
-  public void anyPropertyCanBeBound() {
+  public void anyPropertyCanBeBound() throws BindingException{
     Property<Color> colorProperty = PropertyFactory.createProperty("Color", this, Color.class);
     JLabel label = new JLabel();
     new BindingBuilder<Color, Color>()
@@ -44,7 +44,7 @@ public class ComponentTests {
   }
 
   @Test
-  public void theSourceCanBeAComponent() {
+  public void theSourceCanBeAComponent() throws BindingException {
     Property<Color> colorProperty = PropertyFactory.createProperty("Color", this, Color.class);
     JLabel label = new JLabel();
     new BindingBuilder<Color, Color>()

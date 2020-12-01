@@ -25,7 +25,7 @@ import org.junit.Test;
 
 public class DefaultBindingTests {
   @Test
-  public void aBindingWorks() {
+  public void aBindingWorks() throws BindingException {
     Property<Boolean> sourceProp = PropertyFactory.createProperty("source", this, false);
     Property<Boolean> targetProp = PropertyFactory.createProperty("target", this, false);
     Binding binding = new BindingBuilder<Boolean, Boolean>()
@@ -40,7 +40,7 @@ public class DefaultBindingTests {
   }
 
   @Test
-  public void aBindingCanBeBiDirectional() {
+  public void aBindingCanBeBiDirectional() throws BindingException {
     Property<Boolean> sourceProp = PropertyFactory.createProperty("source", this, false);
     Property<Boolean> targetProp = PropertyFactory.createProperty("target", this, false);
     Binding binding = new BindingBuilder<Boolean, Boolean>()
@@ -60,7 +60,7 @@ public class DefaultBindingTests {
   }
 
   @Test
-  public void bindingsCanBeAutomaticallyApplied() {
+  public void bindingsCanBeAutomaticallyApplied() throws BindingException {
     Property<Boolean> sourceProp = PropertyFactory.createProperty("source", this, false);
     Property<Boolean> targetProp = PropertyFactory.createProperty("target", this, false);
     new BindingBuilder<Boolean, Boolean>()
@@ -75,7 +75,7 @@ public class DefaultBindingTests {
   }
 
   @Test
-  public void biDirectionalBindingsCanBeAutomaticallyApplied() {
+  public void biDirectionalBindingsCanBeAutomaticallyApplied() throws BindingException {
     Property<Boolean> sourceProp = PropertyFactory.createProperty("source", this, false);
     Property<Boolean> targetProp = PropertyFactory.createProperty("target", this, false);
     new BindingBuilder<Boolean, Boolean>()
@@ -95,7 +95,7 @@ public class DefaultBindingTests {
   }
 
   @Test
-  public void aPropertyTriggerCanBeUsed() {
+  public void aPropertyTriggerCanBeUsed() throws BindingException {
     Property<Boolean> sourceProp = PropertyFactory.createProperty("source", this, false);
     Property<Boolean> targetProp = PropertyFactory.createProperty("target", this, false);
     new BindingBuilder<Boolean, Boolean>()
