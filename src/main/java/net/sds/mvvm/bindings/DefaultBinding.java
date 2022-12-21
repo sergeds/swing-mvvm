@@ -22,7 +22,7 @@ import java.util.Map;
 import net.sds.mvvm.utils.EventSuppressor;
 
 /**
- * Defines a default binding that manages the association of {@link BindingLink} with a {@Link Direction}.
+ * Defines a default binding that manages the association of {@link BindingLink} with a {@link Direction}.
  */
 public class DefaultBinding implements Binding {
   private EventSuppressor suppressor = new EventSuppressor();
