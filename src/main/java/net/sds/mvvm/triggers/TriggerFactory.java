@@ -21,10 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import javax.swing.AbstractButton;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 import net.sds.mvvm.bindings.BindingException;
@@ -70,8 +67,12 @@ public class TriggerFactory {
     registerTriggerFactory((o, p) -> o instanceof AbstractButton && p.equals(Paths.SELECTED)
         , (o, p) -> new ItemSelectedTrigger(AbstractButton.class.cast(o)));
 
+    registerTriggerFactory((o, p) -> o instanceof JComboBox && (p.equals(Paths.SELECTED_ITEM))
+            , (o, p) -> new ListSelectionTrigger(JComboBox.class.cast(o)));
+
     registerTriggerFactory((o, p) -> o instanceof JComponent
         , (o, p) -> new ComponentChangedTrigger(JComponent.class.cast(o), p));
+
   }
 
   public static void registerTriggerFactory(BiPredicate<Object, String> predicate, BiFunction<Object, String, Trigger> factory) {

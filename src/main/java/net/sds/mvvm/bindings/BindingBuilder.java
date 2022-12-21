@@ -17,8 +17,6 @@
 
 package net.sds.mvvm.bindings;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 import net.sds.mvvm.triggers.Trigger;
 
 /**

@@ -18,8 +18,10 @@
 package net.sds.mvvm.triggers;
 
 import java.util.Optional;
-import javax.swing.JList;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+
 import net.sds.mvvm.bindings.Binding;
 import net.sds.mvvm.bindings.BindingException;
 import net.sds.mvvm.bindings.Direction;
@@ -27,11 +29,15 @@ import net.sds.mvvm.bindings.Direction;
 public class ListSelectionTrigger implements Trigger {
   private Optional<JList> list = Optional.empty();
   private Optional<JTable> table = Optional.empty();
+  private Optional<JComboBox> combo = Optional.empty();
   public ListSelectionTrigger(JList list) {
     this.list = Optional.of(list);
   }
   public ListSelectionTrigger(JTable table) {
     this.table = Optional.of(table);
+  }
+  public ListSelectionTrigger(JComboBox combo) {
+    this.combo = Optional.of(combo);
   }
 
   @Override
@@ -47,5 +53,7 @@ public class ListSelectionTrigger implements Trigger {
         binding.apply(direction);
       }
     }));
+
+    combo.ifPresent(c -> c.addActionListener(e -> binding.apply(direction)));
   }
 }
