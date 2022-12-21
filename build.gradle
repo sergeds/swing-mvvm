@@ -1,10 +1,25 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
+    }
+}
+
 apply plugin: 'java'
+//apply plugin: 'maven-publish'
+apply plugin: 'com.bmuschko.nexus'
+//apply plugin: 'signing'
 apply plugin: 'idea'
+apply plugin: 'io.codearte.nexus-staging'
 
 wrapper.gradleVersion = '4.8'
 
-group 'net.sds'
-version '0.1.-SNAPSHOT'
+archivesBaseName = 'swing-mvvm'
+group 'com.github.sergeds'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -14,4 +29,54 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
 
     testCompile 'junit:junit:4.12'
+}
+
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+    nexusUsername='lZWF0etY'
+    nexusPassword='MH2kXnOHDPqlCCBIejo5HW3V2fozmqn04iyjG1Yd/715'
+}
+
+modifyPom {
+    project {
+        name 'swing-mvvm'
+        description 'MVVM bindings for Swing'
+        url 'https://github.com/sergeds/swing-mvvm'
+        inceptionYear '2021'
+
+        scm {
+            url 'https://github.com/sergeds/swing-mvvm'
+            connection 'scm:git:git://github.com/sergeds/swing-mvvm.git'
+            developerConnection 'scm:git:ssh://git@github.com:sergeds/sergeds/swing-mvvm.git'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'sergeds'
+                name 'Serge de Schaetzen'
+                email 'sergeds@gmail.com'
+            }
+        }
+    }
+}
+
+nexusStaging {
+    //packageGroup "org.mycompany" //optional if packageGroup == project.getGroup()
+    //stagingProfileId = "yourStagingProfileId" //when not defined will be got from server using "packageGroup"
 }
